@@ -413,12 +413,14 @@
 
             <!-- Map Container -->
             <div class="w-full md:w-1/2 lg:w-2/3 h-64 sm:h-80 md:h-auto order-2 md:order-2 md:rounded-xl overflow-hidden shadow-sm relative">
-                <!-- Mock Map Image -->
-                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Map Location" class="w-full h-full object-cover">
-                <!-- Location Pin Overlay -->
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <i class="fas fa-map-marker-alt text-primary text-5xl drop-shadow-lg"></i>
-                </div>
+                <!-- Google Maps Embed -->
+                <iframe
+                    src="https://maps.google.com/maps?q=Av.%20Balta%20417,%20Chiclayo&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    class="absolute inset-0 w-full h-full border-0"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
 
             <!-- Info Container -->
