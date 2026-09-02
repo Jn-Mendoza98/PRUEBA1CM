@@ -707,9 +707,9 @@ window.addEventListener('pageshow', (event) => {
 
 const bebidasApp = {
     state: {
-        marca: 'Inca Kola', // Inca Kola, Coca-Cola, Fanta
-        tamano: '1 1/2 Litros', // 1 1/2 Litros, 1/2 Litro
-        temperatura: 'Helada', // Helada, Sin helar
+        marca: null, // Inca Kola, Coca-Cola, Fanta
+        tamano: null, // 1 1/2 Litros, 1/2 Litro
+        temperatura: null, // Helada, Sin helar
         qty: 1
     },
 
@@ -748,8 +748,21 @@ const bebidasApp = {
         const pTitle = document.getElementById('bebidas-title');
 
         if (pPrice && pTitle) {
-            pPrice.innerText = 'S/ ' + this.prices[this.state.tamano].toFixed(2);
-            pTitle.innerText = `${this.state.marca} (${this.state.tamano}) - ${this.state.temperatura}`;
+            if (this.state.tamano) {
+                pPrice.innerText = 'S/ ' + this.prices[this.state.tamano].toFixed(2);
+            } else {
+                pPrice.innerText = 'S/ 0.00';
+            }
+
+            const m = this.state.marca || 'Seleccione Marca';
+            const t = this.state.tamano || 'Seleccione Tamaño';
+            const temp = this.state.temperatura || 'Seleccione Temp';
+
+            pTitle.innerText = `${m} (${t}) - ${temp}`;
+
+            if (!this.state.marca && !this.state.tamano && !this.state.temperatura) {
+                 pTitle.innerText = 'Selecciona tus opciones';
+            }
         }
 
         // Update selected states of buttons
@@ -794,6 +807,10 @@ const bebidasApp = {
     },
 
     addToCart() {
+        if (!this.state.marca || !this.state.tamano || !this.state.temperatura) {
+            alert('Por favor selecciona marca, tamaño y temperatura.');
+            return;
+        }
         const name = `${this.state.marca} ${this.state.tamano}`;
         const price = this.prices[this.state.tamano];
         const img = this.images[this.state.marca] || 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=400&q=80';
